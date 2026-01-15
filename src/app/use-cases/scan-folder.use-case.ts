@@ -1,4 +1,4 @@
-import type { Game } from '../../domain/entities/game-types';
+import type { Game } from '../../domain/entities/types';
 import { parseGames } from '../../domain/logic/game-parser';
 import type { IFileSystem } from '../../domain/repositories/file-system.interface';
 
@@ -15,10 +15,8 @@ export const createScanFolder = (fileSystem: IFileSystem): ScanFolderUseCase => 
       .filter((name) => name.toLowerCase().endsWith('.m3u'))
       .map((name) => name.replace(/\.m3u$/i, ''));
 
-    // Busco los
+    // Busco los archivos sueltos
     const chdFiles = entries.filter((name) => name.toLowerCase().endsWith('.chd'));
-
-    console.log('chdFiles: ', chdFiles);
 
     const detectedGames = parseGames(discPattern, chdFiles);
 
@@ -34,21 +32,17 @@ export const createScanFolder = (fileSystem: IFileSystem): ScanFolderUseCase => 
       const alreadyInList = finalGames.some((g) => g.name === orgName);
 
       if (!alreadyInList) {
-        // NO llamamos a scanDirectory() (que abriría el selector de nuevo)
-        // Llamamos a un nuevo método especializado para leer la subcarpeta
         const folderName = `${orgName}.m3u`;
         const discsInside = await fileSystem.getFilesInFolder(folderName);
 
         finalGames.push({
           name: orgName,
-          discs: discsInside, // <-- Ahora aquí tenemos los nombres de los .chd internos
-          isMultidisc: discsInside.length > 1,
+          discs: discsInside,
+          isMultiDisc: discsInside.length > 1,
           status: 'organized',
         });
       }
     }
-
-    console.log(finalGames);
 
     return finalGames;
   };

@@ -1,4 +1,4 @@
-import type { Game } from '../../domain/entities/game-types';
+import type { Game } from '../../domain/entities/types';
 import { generateM3u } from '../../domain/logic/m3u-generator';
 import type { IFileSystem } from '../../domain/repositories/file-system.interface';
 

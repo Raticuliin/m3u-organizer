@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 
-import type { Game } from '../../domain/entities/game-types';
+import type { Game } from '../../domain/entities/types';
 import { createOrganizeGame } from '../../app/use-cases/organize-game.use-case';
 import type { IFileSystem } from '../../domain/repositories/file-system.interface';
 

@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 
 import type { IFileSystem } from '../../domain/repositories/file-system.interface';
 import { createRevertGame } from '../../app/use-cases/revert-game.use-case';
-import type { Game } from '../../domain/entities/game-types';
+import type { Game } from '../../domain/entities/types';
 
 export function useRevertGame(fileSystem: IFileSystem) {
   const [isReverting, setIsReverting] = useState(false);

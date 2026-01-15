@@ -1,4 +1,4 @@
-import type { Game } from '../entities/game-types';
+import type { Game } from '../entities/types';
 
 export interface IFileSystem {
   selectDirectory(): Promise<void>;

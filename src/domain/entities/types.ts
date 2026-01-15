@@ -1,6 +1,12 @@
+export interface Filter {
+  search: string;
+  status: 'all' | 'organized' | 'pending';
+  onlyMultiDisc: boolean;
+}
+
 export interface Game {
   name: string;
-  isMultidisc: boolean;
+  isMultiDisc: boolean;
   discs: string[];
   status: 'pending' | 'organized';
 }

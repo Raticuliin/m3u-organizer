@@ -1,4 +1,4 @@
-import type { Game, GroupingStrategy } from '../entities/game-types';
+import type { Game, GroupingStrategy } from '../entities/types';
 
 export function parseGames(
   discPattern: string,
@@ -12,11 +12,11 @@ export function parseGames(
     const nameWithoutExt = filename.replace(/\.chd$/i, '').trim();
 
     const match = nameWithoutExt.match(discTagRegex);
-    const isMulti = match !== null;
+    const hasDiscTag = match !== null;
 
     let baseName: string;
 
-    if (isMulti) {
+    if (hasDiscTag) {
       if (strategy === 'aggressive') {
         const index = match.index!;
         baseName = nameWithoutExt.substring(0, index).trim();
@@ -31,16 +31,18 @@ export function parseGames(
     if (!gamesMap.has(baseName)) {
       gamesMap.set(baseName, {
         name: baseName,
-        isMultidisc: isMulti,
+        isMultiDisc: false,
         discs: [],
         status: 'pending',
       });
     }
 
     const game = gamesMap.get(baseName)!;
-    if (isMulti) game.isMultidisc = true;
     game.discs.push(filename);
   });
 
-  return Array.from(gamesMap.values());
+  return Array.from(gamesMap.values()).map((game) => ({
+    ...game,
+    isMultiDisc: game.discs.length > 1,
+  }));
 }
