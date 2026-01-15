@@ -7,6 +7,7 @@ import type { IFileSystem } from '../../domain/repositories/file-system.interfac
 export function useScanFolder(fileSystem: IFileSystem) {
   const [games, setGames] = useState<Game[]>([]);
   const [isScanning, setIsScanning] = useState(false);
+  const [hasDirectory, setHasDirectory] = useState(false);
 
   const scanFolder = useMemo(() => createScanFolder(fileSystem), [fileSystem]);
 
@@ -16,6 +17,7 @@ export function useScanFolder(fileSystem: IFileSystem) {
     try {
       const result = await scanFolder(discPattern);
       setGames(result);
+      setHasDirectory(true);
     } catch (error) {
       console.error(`Error scanning folder: `, error);
     } finally {
@@ -26,6 +28,7 @@ export function useScanFolder(fileSystem: IFileSystem) {
   return {
     games,
     setGames,
+    hasDirectory,
     isScanning,
     scan,
   };

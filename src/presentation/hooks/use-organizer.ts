@@ -7,7 +7,7 @@ import { useOrganizeGame } from './use-organize-game';
 import { useRevertGame } from './use-revert-game';
 
 export function useOrganizer(fileSystem: IFileSystem) {
-  const { games, isScanning, scan, setGames } = useScanFolder(fileSystem);
+  const { games, hasDirectory, isScanning, scan, setGames } = useScanFolder(fileSystem);
 
   const { isOrganizing, organize } = useOrganizeGame(fileSystem);
   const [isOrganizingList, setIsOrganizingList] = useState(false);
@@ -45,8 +45,9 @@ export function useOrganizer(fileSystem: IFileSystem) {
 
   return {
     scan,
-    organize,
-    revert,
+    hasDirectory,
+    //organize,
+    //revert,
     organizeList,
     revertList,
     status: {
