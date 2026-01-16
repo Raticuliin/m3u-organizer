@@ -1,4 +1,3 @@
-import React from 'react';
 import BrowserGameItem from '../components/BrowserGameItem';
 
 export default function MainSection() {
