@@ -27,13 +27,13 @@ export default function Home({
       <div
         className="
             w-full max-w-2xl 
-            border-3 rounded-3xl
+            border-2 rounded-3xl
             px-30 py-15
             flex flex-col items-center text-center gap-4
-          bg-emerald-500/1 border-emerald-800/10"
+          bg-emerald-500/1 border-emerald-800/20"
       >
         <h2 className="text-3xl font-bold text-white ">No directory selected</h2>
-        <p className="text-gray-400 max-w-md leading-relaxed mb-2">
+        <p className="text-stone-400 max-w-md leading-relaxed mb-2">
           Select your game collection folder to begin scanning for{' '}
           <span className="text-emerald-400 font-medium">.chd</span> files and generating for{' '}
           <span className="text-emerald-400 font-medium">.m3u</span> playlists.
