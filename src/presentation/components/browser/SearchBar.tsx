@@ -1,6 +1,12 @@
 import { Search } from 'lucide-react';
 
-export function SearchBar() {
+interface Props {
+  value: string;
+  onChange: (val: string) => void;
+  placeHolder?: string;
+}
+
+export function SearchBar({ value, onChange, placeHolder }: Props) {
   return (
     <div className="relative">
       <div className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40">
@@ -14,10 +20,11 @@ export function SearchBar() {
         bg-black/20 
         border-2 border-white/20 
         focus:outline-none focus:border-emerald-500/50 
-        transition-colors
-          "
+        transition-colors"
         type="text"
-        placeholder="Search for a game"
+        placeholder={placeHolder}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
       />
     </div>
   );

@@ -8,7 +8,7 @@ export function useFilterGames(games: Game[]) {
     onlyMultiDisc: false,
   });
 
-  const filterGameList = useMemo(() => filterGames(games, filter), [games, filter]);
+  const filteredGames = useMemo(() => filterGames(games, filter), [games, filter]);
 
   const updateFilter = (newFilter: Partial<Filter>) => {
     setFilters((prev) => ({ ...prev, ...newFilter }));
@@ -22,7 +22,7 @@ export function useFilterGames(games: Game[]) {
 
   return {
     filter,
-    filterGameList,
+    filteredGames,
     updateFilter,
     resetFilters,
   };

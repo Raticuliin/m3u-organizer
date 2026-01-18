@@ -24,7 +24,8 @@ export default function StagingArea({
     >
       <section
         className="
-                h-1/5
+
+        h-1/6
                 p-5 
                 flex flex-col justify-between
                 border-b border-emerald-500/10"

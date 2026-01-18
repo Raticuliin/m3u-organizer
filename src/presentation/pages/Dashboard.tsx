@@ -1,28 +1,22 @@
-import { useState } from 'react';
-import type { Game, Tab } from '../../domain/entities/types';
+import { type ReactNode } from 'react';
+import type { Tab } from '../../domain/entities/types';
 import Sidebar from '../components/layout/Sidebar';
-import SourceBrowser from '../components/layout/SourceBrowser';
-import StagingArea from '../components/layout/StagingArea';
+
+interface Props {
+  handleScan: (discPattern: string) => void;
+  currentTab: Tab;
+  setCurrentTab: (tab: Tab) => void;
+  browserSlot: ReactNode;
+  queueSlot: ReactNode;
+}
 
 export default function Dashboard({
   handleScan,
-  browserGameList,
-  queueGameList,
-  addGameToQueue,
-  addAllGamesToQueue,
-  removeGameFromQueue,
-  removeAllGamesFromQueue,
-}: {
-  handleScan: (discPattern: string) => void;
-  browserGameList: Game[];
-  queueGameList: Game[];
-  addGameToQueue: (...props: any) => void;
-  addAllGamesToQueue: (...props: any) => void;
-  removeGameFromQueue: (...props: any) => void;
-  removeAllGamesFromQueue: (...props: any) => void;
-}) {
-  const [currentTab, setCurrentTab] = useState<Tab>('convert');
-
+  currentTab,
+  setCurrentTab,
+  browserSlot,
+  queueSlot,
+}: Props) {
   return (
     <div
       className="
@@ -32,16 +26,8 @@ export default function Dashboard({
     >
       <Sidebar handleScan={handleScan} currentTab={currentTab} setCurrentTab={setCurrentTab} />
       <main className="flex flex-1 overflow-hidden">
-        <SourceBrowser
-          gameList={browserGameList}
-          addGameToQueue={addGameToQueue}
-          addAllGamesToQueue={addAllGamesToQueue}
-        />
-        <StagingArea
-          gameList={queueGameList}
-          removeGameFromQueue={removeGameFromQueue}
-          removeAllGamesFromQueue={removeAllGamesFromQueue}
-        />
+        {browserSlot}
+        {queueSlot}
       </main>
     </div>
   );

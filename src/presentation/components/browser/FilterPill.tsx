@@ -1,4 +1,10 @@
-export function FilterPill({ isActive }: { isActive: boolean }) {
+interface Props {
+  label: string;
+  isActive: boolean;
+  onClick: () => void;
+}
+
+export function FilterPill({ label, isActive, onClick }: Props) {
   return (
     <button
       className={`
@@ -11,8 +17,9 @@ export function FilterPill({ isActive }: { isActive: boolean }) {
           transition-all duration-100 ease-in
           ${isActive ? 'border-emerald-500/20 bg-emerald-500/10 hover:border-emerald-500/30 hover:bg-emerald-500/20' : 'border-emerald-100/20 bg-emerald-100/10 hover:border-emerald-100/30 hover:bg-emerald-100/20'}
       `}
+      onClick={onClick}
     >
-      <p>Filter</p>
+      {label}
     </button>
   );
 }
