@@ -11,24 +11,23 @@ export default function NavItem({ Icon, text, isActive, setIsActive }: NavItemPr
   return (
     <button
       className={`
-        flex flex-row items-center gap-3
-        text-bold text-lg
-        w-full py-3 px-6
-        rounded-xl 
-        active:scale-98
-        hover:cursor-pointer 
-        transition-all duration-100 ease-in
+        group flex items-center gap-3 w-full px-4 py-3 rounded-xl
+        text-sm font-medium transition-all duration-200 ease-out
         border
         ${
           isActive
-            ? 'bg-emerald-900/10 text-white/80 border-emerald-900/20 hover:bg-emerald-900/20'
-            : 'border-transparent text-emerald-500/50 hover:bg-emerald-900/5 hover:border-emerald-900/10'
+            ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20 shadow-lg shadow-emerald-900/20'
+            : 'bg-transparent text-stone-400 border-transparent hover:bg-stone-900 hover:text-stone-200'
         }
       `}
       onClick={setIsActive}
     >
       <div>
-        <Icon strokeWidth={2}></Icon>
+        <Icon
+          size={20}
+          strokeWidth={2}
+          className={`transition-colors duration-200 ${isActive ? 'text-emerald-400' : 'text-stone-500 group-hover:text-stone-300'}`}
+        ></Icon>
       </div>
       <p>{text}</p>
     </button>

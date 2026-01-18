@@ -12,20 +12,22 @@ export default function FooterSection({
   moveAllGames: (...props: any) => void;
 }) {
   return (
-    <section className="p-5">
+    <section className="p-4 border-t border-white/5 bg-stone-900 z-10">
       {section === 'browser' ? (
         <Button
           Icon={PlusSquare}
-          text="Add all games"
+          text="Add All to Queue"
           variant="secondary"
+          disabled={gameList.length === 0}
           onClick={() => moveAllGames(gameList)}
         />
       ) : (
         <Button
           Icon={MinusSquare}
-          text="Remove all games"
+          text="Clear Queue"
           variant="secondary"
           color="rose"
+          disabled={gameList.length === 0}
           onClick={() => moveAllGames(gameList)}
         />
       )}

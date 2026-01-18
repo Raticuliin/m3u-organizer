@@ -1,35 +1,21 @@
-import { Folder } from 'lucide-react';
-import Button from '../components/shared/Button';
 import Header from '../components/shared/Header';
+import Hero from '../components/home/Hero';
+import FeaturesSection from '../components/home/FeaturesSection';
 
 export default function Home({ handleScan }: { handleScan: (discPattern: string) => void }) {
   return (
     <div
       className="
         min-h-screen
-        flex flex-col justify-center items-center
+        flex flex-col justify-center items-center gap-6
+        p-8 md:p-12
       bg-stone-900 text-emerald-100"
     >
-      {/** Header */}
       <Header />
 
-      {/** Card */}
-      <div
-        className="
-            w-full max-w-2xl 
-            border-2 rounded-3xl
-            px-30 py-15
-            flex flex-col items-center text-center gap-4
-          bg-emerald-500/1 border-emerald-800/20"
-      >
-        <h2 className="text-3xl font-bold text-white ">No directory selected</h2>
-        <p className="text-stone-400 max-w-md leading-relaxed mb-2">
-          Select your game collection folder to begin scanning for{' '}
-          <span className="text-emerald-400 font-medium">.chd</span> files and generating for{' '}
-          <span className="text-emerald-400 font-medium">.m3u</span> playlists.
-        </p>
-        <Button onClick={handleScan} Icon={Folder} text="Select Folder" />
-      </div>
+      <Hero handleScan={handleScan} />
+
+      <FeaturesSection />
     </div>
   );
 }

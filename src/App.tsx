@@ -14,7 +14,7 @@ import SourceBrowser from './presentation/components/layout/SourceBrowser';
 export default function App() {
   const fileSystem = useMemo(() => createBrowserFileSystem(), []);
 
-  const { scan, hasDirectory, organizeList, revertList, games } = useOrganizer(fileSystem);
+  const { scan, hasDirectory, organizeList, revertList, games, status } = useOrganizer(fileSystem);
 
   const { filteredGames, filter, updateFilter } = useFilterGames(games);
 
@@ -113,6 +113,8 @@ export default function App() {
         }
         queueSlot={
           <StagingArea
+            isLoading={status.isBusy}
+            currentTab={currentTab}
             gameList={queueGameList}
             removeGameFromQueue={removeGameFromQueue}
             removeAllGamesFromQueue={removeAllGamesFromQueue}

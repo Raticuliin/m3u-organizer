@@ -20,12 +20,10 @@ export default function Dashboard({
   return (
     <div
       className="
-        h-screen w-full overflow-hidden
-        flex 
-      bg-stone-900 text-white"
+        flex h-screen w-screen overflow-hidden bg-stone-950 text-emerald-50 font-sans selection:bg-emerald-500/30"
     >
       <Sidebar handleScan={handleScan} currentTab={currentTab} setCurrentTab={setCurrentTab} />
-      <main className="flex flex-1 overflow-hidden">
+      <main className="flex flex-1 overflow-hidden bg-stone-900 shadow-2xl rounded-l-3xl my-2 mr-2 border border-white/5 relative z-10">
         {browserSlot}
         {queueSlot}
       </main>

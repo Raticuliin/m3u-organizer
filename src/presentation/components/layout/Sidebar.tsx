@@ -1,33 +1,30 @@
-import { Coffee, Folder, IterationCcw, SquareLibrary } from 'lucide-react';
+import { Coffee, Folder, RotateCcw, SquareLibrary } from 'lucide-react';
 import Header from '../shared/Header';
 import NavItem from '../shared/NavItem';
 import Button from '../shared/Button';
 import type { Tab } from '../../../domain/entities/types';
 
-export default function Sidebar({
-  handleScan,
-  currentTab,
-  setCurrentTab,
-}: {
+interface Props {
   handleScan: (discPattern: string) => void;
   currentTab: Tab;
   setCurrentTab: (value: Tab) => void;
-}) {
-  return (
-    <aside
-      className="
+}
 
-        bg-emerald-950/3
-        p-5
-        relative
-        flex flex-col justify-between
-        border-r border-r-emerald-500/10 
-      "
-    >
-      <div>
+export default function Sidebar({ handleScan, currentTab, setCurrentTab }: Props) {
+  const handleBuyMeACoffee = () => {
+    const username = 'raticuliin';
+
+    window.open(`https://www.buymeacoffee.com/${username}`, '_blank', 'noopener,noreferrer');
+  };
+  return (
+    <aside className="w-72 shrink-0 flex flex-col justify-between p-6 bg-stone-950 text-stone-300">
+      <div className="flex flex-col gap-8">
         <Header />
 
         <nav className="flex flex-col gap-2">
+          <p className="px-4 text-xs font-bold uppercase tracking-wider text-stone-500 mb-2">
+            Menu
+          </p>
           <NavItem
             Icon={SquareLibrary}
             text="Convert games"
@@ -35,20 +32,20 @@ export default function Sidebar({
             setIsActive={() => setCurrentTab('convert')}
           />
           <NavItem
-            Icon={IterationCcw}
+            Icon={RotateCcw}
             text="Revert games"
             isActive={currentTab === 'revert'}
             setIsActive={() => setCurrentTab('revert')}
           />
         </nav>
       </div>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-3 pt-6 border-t border-white/5">
         <Button
           Icon={Coffee}
           text="Buy me a coffee"
           variant="secondary"
           color="amber"
-          onClick={() => {}}
+          onClick={handleBuyMeACoffee}
         />
         <Button
           Icon={Folder}

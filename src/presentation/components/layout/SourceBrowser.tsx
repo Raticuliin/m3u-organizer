@@ -6,8 +6,8 @@ import type { Filter, Game } from '../../../domain/entities/types';
 
 interface Props {
   gameList: Game[];
-  addGameToQueue: (...props: any) => void;
-  addAllGamesToQueue: (...props: any) => void;
+  addGameToQueue: (game: Game) => void;
+  addAllGamesToQueue: (games: Game[]) => void;
   filter: Filter;
   updateFilter: (newFilter: Partial<Filter>) => void;
 }
@@ -22,24 +22,17 @@ export default function SourceBrowser({
   const section = 'browser';
 
   return (
-    <section
-      className="
-        bg-emerald-500/3
-        flex-1 flex flex-col
-        border-r border-emerald-500/10"
-    >
-      {/** Seccion de arriba */}
-      <section
-        className="
-          h-1/6
-          p-5 
-          flex flex-col justify-between
-          border-b border-emerald-500/10"
-      >
-        <DashboardTitle text="Browser" />
+    <section className="flex-1 flex flex-col border-r border-white/5 bg-stone-900 min-w-0">
+      {/* Header Fijo */}
+      <div className="h-42 p-6 border-b border-white/5 flex flex-col gap-4 bg-stone-900 z-10">
+        <DashboardTitle text="Library Browser" />
         <FilterGroup currentFilter={filter} onUpdateFilter={updateFilter} />
-      </section>
+      </div>
+
+      {/* Lista con Scroll */}
       <MainSection section={section} gameList={gameList} moveGame={addGameToQueue} />
+
+      {/* Footer Fijo */}
       <FooterSection section={section} gameList={gameList} moveAllGames={addAllGamesToQueue} />
     </section>
   );

@@ -7,17 +7,22 @@ interface Props {
 export function FilterPill({ label, isActive, onClick }: Props) {
   return (
     <button
-      className={`
-          text-xs text-
-          px-4 py-1
-          rounded-full
-          border-2
-          hover:cursor-pointer
-          active:scale-95
-          transition-all duration-100 ease-in
-          ${isActive ? 'border-emerald-500/20 bg-emerald-500/10 hover:border-emerald-500/30 hover:bg-emerald-500/20' : 'border-emerald-100/20 bg-emerald-100/10 hover:border-emerald-100/30 hover:bg-emerald-100/20'}
-      `}
       onClick={onClick}
+      className={`
+          px-3 py-1.5
+          rounded-full
+          text-xs font-medium tracking-wide
+          border
+          transition-all duration-200 ease-out
+          active:scale-95
+          select-none
+          
+          ${
+            isActive
+              ? 'bg-emerald-500/10 border-emerald-500/50 text-emerald-400 hover:bg-emerald-500/20 shadow-[0_0_8px_rgba(16,185,129,0.1)]'
+              : 'bg-transparent border-stone-700 text-stone-500 hover:border-stone-500 hover:text-stone-300 hover:bg-stone-800'
+          }
+      `}
     >
       {label}
     </button>

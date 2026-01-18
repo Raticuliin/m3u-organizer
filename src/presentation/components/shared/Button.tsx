@@ -1,4 +1,4 @@
-import type { LucideIcon } from 'lucide-react';
+import { Loader2, type LucideIcon } from 'lucide-react';
 
 type ButtonVariant = 'primary' | 'secondary';
 type ButtonColor = 'emerald' | 'blue' | 'rose' | 'amber';
@@ -9,6 +9,9 @@ interface ButtonProps {
   text: string;
   variant?: ButtonVariant;
   color?: ButtonColor;
+
+  isLoading?: boolean;
+  disabled?: boolean;
 }
 
 const colorMap: Record<ButtonColor, { primary: string; secondary: string }> = {
@@ -42,7 +45,11 @@ export default function Button({
   text,
   variant = 'primary',
   color = 'emerald',
+  isLoading = false,
+  disabled = false,
 }: ButtonProps) {
+  const isInteractivityDisabled = disabled || isLoading;
+
   const selectedStyle = colorMap[color][variant === 'primary' ? 'primary' : 'secondary'];
 
   return (
@@ -55,12 +62,23 @@ export default function Button({
         active:scale-98
         hover:cursor-pointer 
         transition-all duration-100 ease-in
+
         ${selectedStyle}
+        
+        ${
+          isInteractivityDisabled
+            ? 'opacity-50 cursor-not-allowed pointer-events-none'
+            : 'active:scale-98 hover:cursor-pointer'
+        }
         `}
       onClick={onClick}
     >
       <div>
-        <Icon strokeWidth={2} />
+        {isLoading ? (
+          <Loader2 className="animate-spin" strokeWidth={2} />
+        ) : (
+          <Icon strokeWidth={2} />
+        )}
       </div>
       <p>{text}</p>
     </button>

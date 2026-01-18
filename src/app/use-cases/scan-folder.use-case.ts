@@ -26,7 +26,7 @@ export const createScanFolder = (fileSystem: IFileSystem): ScanFolderUseCase => 
       };
     });
 
-    for (const folderName of convertedGamesSet) {
+    for (const folderName of m3uFolders) {
       const gameName = folderName.replace(/\.m3u$/i, '');
 
       const alreadyInList = finalGames.some((g) => g.name === gameName);

@@ -23,17 +23,13 @@ export default function FilterGroup({ currentFilter, onUpdateFilter }: Props) {
   };
 
   return (
-    <section>
+    <section className="flex flex-col gap-3">
       <SearchBar
         value={currentFilter.search}
         onChange={handleSearchChange}
-        placeHolder="Buscar juego"
+        placeholder="Search games..."
       />
-      <ul
-        className="
-        pt-2
-        flex gap-2"
-      >
+      <ul className="flex flex-wrap gap-2">
         {BOOLEAN_FILTERS.map((filterConfig) => (
           <FilterPill
             key={filterConfig.key}
