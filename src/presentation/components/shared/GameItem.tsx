@@ -2,13 +2,13 @@ import { Gamepad2, MinusCircle, PlusCircle } from 'lucide-react';
 import type { Game, Section } from '../../../domain/entities/types';
 
 interface GameItemProps {
-  game?: Game;
+  game: Game;
   variant: Section;
+  moveGame: (...args: any) => void;
 }
 
-export default function GameItem({ game, variant = 'browser' }: GameItemProps) {
+export default function GameItem({ game, variant = 'browser', moveGame }: GameItemProps) {
   if (variant === 'browser') {
-    console.log('browser  variant');
     return (
       <div
         className="
@@ -37,18 +37,19 @@ export default function GameItem({ game, variant = 'browser' }: GameItemProps) {
               font-bold
             "
             >
-              Nombre
+              {game.name}
             </p>
             <p
               className="
               text-emerald-100/50
             "
             >
-              Discos
+              {game.discs.length} discs
             </p>
           </div>
         </div>
         <button
+          onClick={() => moveGame(game)}
           className="
           p-2
           rounded-full 
@@ -67,7 +68,6 @@ export default function GameItem({ game, variant = 'browser' }: GameItemProps) {
       </div>
     );
   } else {
-    console.log('queue variant');
     return (
       <div
         className="
@@ -96,18 +96,19 @@ export default function GameItem({ game, variant = 'browser' }: GameItemProps) {
               font-bold
             "
             >
-              Nombre
+              {game.name}
             </p>
             <p
               className="
               text-emerald-100/50
             "
             >
-              Discos
+              {game.discs.length} discs
             </p>
           </div>
         </div>
         <button
+          onClick={() => moveGame(game)}
           className="
           p-2
           rounded-full 

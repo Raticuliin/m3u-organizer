@@ -2,17 +2,7 @@ import { Folder } from 'lucide-react';
 import Button from '../components/shared/Button';
 import Header from '../components/shared/Header';
 
-export default function Home({
-  scan,
-  discPattern,
-}: {
-  scan: (discPattern: string) => void;
-  discPattern: string;
-}) {
-  const handleScan = () => {
-    scan(discPattern);
-  };
-
+export default function Home({ handleScan }: { handleScan: (discPattern: string) => void }) {
   return (
     <div
       className="

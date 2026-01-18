@@ -4,7 +4,7 @@ type ButtonVariant = 'primary' | 'secondary';
 type ButtonColor = 'emerald' | 'blue' | 'rose' | 'amber';
 
 interface ButtonProps {
-  onClick: () => void;
+  onClick: (...args: any[]) => void;
   Icon: LucideIcon;
   text: string;
   variant?: ButtonVariant;

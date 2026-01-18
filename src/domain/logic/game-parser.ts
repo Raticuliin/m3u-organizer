@@ -33,7 +33,8 @@ export function parseGames(
         name: baseName,
         isMultiDisc: false,
         discs: [],
-        status: 'pending',
+        format: '.m3u',
+        isConverted: false,
       });
     }
 

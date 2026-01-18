@@ -2,8 +2,17 @@ import DashboardTitle from '../shared/DashboardTitle';
 import FilterGroup from '../browser/FilterGroup';
 import FooterSection from './sections/FooterSection';
 import MainSection from './sections/MainSection';
+import type { Game } from '../../../domain/entities/types';
 
-export default function SourceBrowser() {
+export default function SourceBrowser({
+  gameList,
+  addGameToQueue,
+  addAllGamesToQueue,
+}: {
+  gameList: Game[];
+  addGameToQueue: (...props: any) => void;
+  addAllGamesToQueue: (...props: any) => void;
+}) {
   const section = 'browser';
 
   return (
@@ -24,8 +33,8 @@ export default function SourceBrowser() {
         <DashboardTitle text="Browser" />
         <FilterGroup />
       </section>
-      <MainSection section={section} />
-      <FooterSection section={section} />
+      <MainSection section={section} gameList={gameList} moveGame={addGameToQueue} />
+      <FooterSection section={section} gameList={gameList} moveAllGames={addAllGamesToQueue} />
     </section>
   );
 }

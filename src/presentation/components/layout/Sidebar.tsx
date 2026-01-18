@@ -1,12 +1,18 @@
 import { Coffee, Folder, IterationCcw, SquareLibrary } from 'lucide-react';
 import Header from '../shared/Header';
 import NavItem from '../shared/NavItem';
-import { useState } from 'react';
 import Button from '../shared/Button';
+import type { Tab } from '../../../domain/entities/types';
 
-export default function Sidebar() {
-  const [activeTab, setActiveTab] = useState<'convert' | 'revert'>('convert');
-
+export default function Sidebar({
+  handleScan,
+  currentTab,
+  setCurrentTab,
+}: {
+  handleScan: (discPattern: string) => void;
+  currentTab: Tab;
+  setCurrentTab: (value: Tab) => void;
+}) {
   return (
     <aside
       className="
@@ -25,14 +31,14 @@ export default function Sidebar() {
           <NavItem
             Icon={SquareLibrary}
             text="Convert games"
-            isActive={activeTab === 'convert'}
-            setIsActive={() => setActiveTab('convert')}
+            isActive={currentTab === 'convert'}
+            setIsActive={() => setCurrentTab('convert')}
           />
           <NavItem
             Icon={IterationCcw}
             text="Revert games"
-            isActive={activeTab === 'revert'}
-            setIsActive={() => setActiveTab('revert')}
+            isActive={currentTab === 'revert'}
+            setIsActive={() => setCurrentTab('revert')}
           />
         </nav>
       </div>
@@ -49,7 +55,7 @@ export default function Sidebar() {
           text="Select folder"
           variant="secondary"
           color="blue"
-          onClick={() => {}}
+          onClick={handleScan}
         />
       </div>
     </aside>

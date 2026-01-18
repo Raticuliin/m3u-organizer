@@ -5,7 +5,6 @@ import { filterGames } from '../../domain/logic/game-filter';
 export function useFilterGames(games: Game[]) {
   const [filter, setFilters] = useState<Filter>({
     search: '',
-    status: 'all',
     onlyMultiDisc: false,
   });
 
@@ -18,7 +17,6 @@ export function useFilterGames(games: Game[]) {
   const resetFilters = () =>
     setFilters({
       search: '',
-      status: 'all',
       onlyMultiDisc: false,
     });
 

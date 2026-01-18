@@ -7,7 +7,6 @@ import type { Game } from './domain/entities/types';
 
 import Home from './presentation/pages/Home';
 import Dashboard from './presentation/pages/Dashboard';
-import { CircleMinus, CirclePlus, Folder, Gamepad, Search, SquarePlus, Trash } from 'lucide-react';
 
 // --- ICONOS SVG ---
 export default function App() {
@@ -18,52 +17,58 @@ export default function App() {
 
   const { filterGameList: filteredGames, filter, updateFilter } = useFilterGames(games);
 
-  const [activeTab, setActiveTab] = useState<'convert' | 'revert'>('convert');
-
-  const [queue, setQueue] = useState<Game[]>([]);
+  const [queueGameList, setQueueGameList] = useState<Game[]>([]);
 
   const DISC_PATTERN = 'Disc';
 
-  // Sincronización automática de filtros
-  useEffect(() => {
-    updateFilter({ status: activeTab });
-    setQueue([]);
-  }, [activeTab]);
-
-  // --- LOGICA DE COLA ---
-  const addToQueue = (game: Game) => {
-    if (!queue.find((g) => g.name === game.name)) setQueue([...queue, game]);
+  const handleScan = () => {
+    scan(DISC_PATTERN);
   };
 
-  const removeFromQueue = (name: string) => {
-    setQueue((prev) => prev.filter((g) => g.name !== name));
+  const browserGameList = filteredGames.filter(
+    (game) => !queueGameList.some((queueGame) => queueGame.name === game.name),
+  );
+
+  const addGameToQueue = (game: Game) => {
+    setQueueGameList((prev) => {
+      if (prev.some((g) => g.name === game.name)) return prev;
+      return [...prev, game];
+    });
   };
 
-  const addAllToQueue = () => {
-    // Filtramos los que ya están en la cola para no duplicar
-    const gamesToAdd = filteredGames.filter((g) => !queue.find((q) => q.name === g.name));
-    setQueue([...queue, ...gamesToAdd]);
+  const addAllGamesToQueue = (browserGames: Game[]) => {
+    browserGames.forEach((game) => {
+      addGameToQueue(game);
+    });
   };
 
-  const handleProcessQueue = async () => {
-    for (const game of queue) {
-      if (activeTab === 'pending') {
-        await organizeList([game]);
-        setGames((prev) =>
-          prev.map((g) => (g.name === game.name ? { ...g, status: 'organized' } : g)),
-        );
-      } else {
-        await revertList([game]);
-        setGames((prev) =>
-          prev.map((g) => (g.name === game.name ? { ...g, status: 'pending' } : g)),
-        );
-      }
-    }
-    setQueue([]);
+  const removeGameFromQueue = (game: Game) => {
+    setQueueGameList((prev) => {
+      return prev.filter((g) => g.name !== game.name);
+    });
   };
 
-  if (!hasDirectory) return <Home scan={scan} discPattern={DISC_PATTERN} />;
-  else return <Dashboard />;
+  const removeAllGamesFromQueue = (queueGames: Game[]) => {
+    queueGames.forEach((game) => {
+      removeGameFromQueue(game);
+    });
+  };
+
+  if (!hasDirectory) {
+    return <Home handleScan={handleScan} />;
+  } else {
+    return (
+      <Dashboard
+        handleScan={handleScan}
+        browserGameList={browserGameList}
+        queueGameList={queueGameList}
+        addGameToQueue={addGameToQueue}
+        addAllGamesToQueue={addAllGamesToQueue}
+        removeGameFromQueue={removeGameFromQueue}
+        removeAllGamesFromQueue={removeAllGamesFromQueue}
+      />
+    );
+  }
   /*
     return (
       <div className="flex h-screen bg-[#0a0f12] text-slate-400 font-sans overflow-hidden">

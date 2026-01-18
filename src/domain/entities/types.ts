@@ -1,6 +1,5 @@
 export interface Filter {
   search: string;
-  status: 'all' | 'organized' | 'pending';
   onlyMultiDisc: boolean;
 }
 
@@ -8,8 +7,10 @@ export interface Game {
   name: string;
   isMultiDisc: boolean;
   discs: string[];
-  status: 'pending' | 'organized';
+  format: '.chd' | '.m3u';
+  isConverted: boolean;
 }
 
 export type GroupingStrategy = 'safe' | 'aggressive';
 export type Section = 'browser' | 'queue';
+export type Tab = 'convert' | 'revert';

@@ -13,9 +13,7 @@ export const createBrowserFileSystem = (): IFileSystem => {
     },
 
     async scanDirectory(): Promise<string[]> {
-      if (!rootHandle) {
-        rootHandle = await window.showDirectoryPicker({ mode: 'readwrite' });
-      }
+      rootHandle = await window.showDirectoryPicker({ mode: 'readwrite' });
 
       try {
         fileHandles.clear();

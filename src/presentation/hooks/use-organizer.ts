@@ -46,8 +46,6 @@ export function useOrganizer(fileSystem: IFileSystem) {
   return {
     scan,
     hasDirectory,
-    //organize,
-    //revert,
     organizeList,
     revertList,
     status: {
