@@ -24,7 +24,7 @@ export default function Header() {
         <div className="flex flex-col">
           <div className="flex items-center gap-2">
             <h1 className="text-white font-bold tracking-tight text-lg leading-none">
-              M3UConverter
+              M3UOrganizer
             </h1>
 
             {/* Badge de versión estilo código */}
