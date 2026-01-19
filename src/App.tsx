@@ -9,6 +9,7 @@ import Home from './presentation/pages/Home';
 import Dashboard from './presentation/pages/Dashboard';
 import StagingArea from './presentation/components/layout/StagingArea';
 import SourceBrowser from './presentation/components/layout/SourceBrowser';
+import { Analytics } from '@vercel/analytics/react';
 
 // --- ICONOS SVG ---
 export default function App() {
@@ -94,34 +95,37 @@ export default function App() {
     }
   };
 
-  if (!hasDirectory) {
-    return <Home handleScan={handleScan} />;
-  } else {
-    return (
-      <Dashboard
-        handleScan={handleScan}
-        currentTab={currentTab}
-        setCurrentTab={setCurrentTab}
-        browserSlot={
-          <SourceBrowser
-            gameList={browserGameList}
-            addGameToQueue={addGameToQueue}
-            addAllGamesToQueue={addAllGamesToQueue}
-            filter={filter}
-            updateFilter={updateFilter}
-          />
-        }
-        queueSlot={
-          <StagingArea
-            isLoading={status.isBusy}
-            currentTab={currentTab}
-            gameList={queueGameList}
-            removeGameFromQueue={removeGameFromQueue}
-            removeAllGamesFromQueue={removeAllGamesFromQueue}
-            convertGames={handleProcessQueue}
-          />
-        }
-      />
-    );
-  }
+  return (
+    <div>
+      {!hasDirectory ? (
+        <Home handleScan={handleScan} />
+      ) : (
+        <Dashboard
+          handleScan={handleScan}
+          currentTab={currentTab}
+          setCurrentTab={setCurrentTab}
+          browserSlot={
+            <SourceBrowser
+              gameList={browserGameList}
+              addGameToQueue={addGameToQueue}
+              addAllGamesToQueue={addAllGamesToQueue}
+              filter={filter}
+              updateFilter={updateFilter}
+            />
+          }
+          queueSlot={
+            <StagingArea
+              isLoading={status.isBusy}
+              currentTab={currentTab}
+              gameList={queueGameList}
+              removeGameFromQueue={removeGameFromQueue}
+              removeAllGamesFromQueue={removeAllGamesFromQueue}
+              convertGames={handleProcessQueue}
+            />
+          }
+        />
+      )}
+      <Analytics />
+    </div>
+  );
 }
