@@ -10,6 +10,7 @@ import Dashboard from './presentation/pages/Dashboard';
 import StagingArea from './presentation/components/layout/StagingArea';
 import SourceBrowser from './presentation/components/layout/SourceBrowser';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 // --- ICONOS SVG ---
 export default function App() {
@@ -125,6 +126,7 @@ export default function App() {
           }
         />
       )}
+      <SpeedInsights />
       <Analytics />
     </div>
   );
